@@ -1,0 +1,1 @@
+pip install https://github.com/orcasgit/python-withings/archive/master.zip#egg=withings-0.4.0

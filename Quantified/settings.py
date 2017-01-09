@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'withingsapp',
+    'storages',
+    'django_dropbox',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,3 +125,8 @@ STATIC_URL = '/static/'
 
 WITHINGS_CONSUMER_KEY = '6b0574609440b336eb1128255201370e869505ee44fdd0d075de0855ee242f'
 WITHINGS_CONSUMER_SECRET = '095b99f2234529775297731b784ed94b3491809138805385242b279cb4b'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+
+DROPBOX_OAUTH2_TOKEN = 'Pd_bXOgvnIoAAAAAAAAEGohE-FfI2XjGvb1okuBPZxqA8Zjy86VAUCkrLicDLfzE'
+
