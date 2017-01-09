@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
+    'withingsapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -112,10 +113,13 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = False
+USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+WITHINGS_CONSUMER_KEY = '6b0574609440b336eb1128255201370e869505ee44fdd0d075de0855ee242f'
+WITHINGS_CONSUMER_SECRET = '095b99f2234529775297731b784ed94b3491809138805385242b279cb4b'
