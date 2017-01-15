@@ -3,6 +3,7 @@ from django.core.management.base import BaseCommand  # , CommandError
 from core.models import SleepAs
 import csv
 from datetime import datetime, timedelta
+from django.core.files.storage import default_storage
 
 
 class Command(BaseCommand):
@@ -89,24 +90,30 @@ class Command(BaseCommand):
         return times
 
     def read_csv(self, filename):
-        with open(filename, 'r') as csvfile:
-            source = csv.reader(csvfile)
-            header = False
-            data_sleep = []
-            event_key = None
-            for row in source:
-                if len(row[0]) < 1:
-                    continue
-                header = not header
-                if header:
-                    event_key = tuple(row[15:])
-                else:
-                    event_value = tuple(row[15:])
-                    data_events = self.filter_times(event_key, event_value)
-                    row = self.parse_sleep(row, data_events)
-                    if not len(row) < 1:
-                        data_sleep.append(row)
-            return data_sleep
+        # TODO: make permanent (maybe a selector from Dropbox for the SleepAsConfig filename)
+
+        if default_storage.exists('/Apps/Sleep Cloud Backup/Sleep as Android Data'):
+            with default_storage.open('/Apps/Sleep Cloud Backup/Sleep as Android Data', 'r') as csvfile:
+                source = csv.reader(csvfile)
+                header = False
+                data_sleep = []
+                event_key = None
+                for row in source:
+                    if len(row[0]) < 1:
+                        continue
+                    header = not header
+                    if header:
+                        event_key = tuple(row[15:])
+                    else:
+                        event_value = tuple(row[15:])
+                        data_events = self.filter_times(event_key, event_value)
+                        row = self.parse_sleep(row, data_events)
+                        if not len(row) < 1:
+                            data_sleep.append(row)
+                return data_sleep
+        else:
+            self.style.FAILURE("file doesn't exist")
+            exit
 
     def import_data(self, data):
         num_epochs = 5
