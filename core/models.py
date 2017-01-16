@@ -5,13 +5,28 @@ from django.utils.encoding import python_2_unicode_compatible
 
 # Create your models here.
 
+
 @python_2_unicode_compatible
-class SleepAsConfig(models.Model):
+class FileConfig(models.Model):
     filename = models.CharField(max_length=50)
     file_to_process = models.CharField(max_length=250)
+    file_type = models.CharField(max_length=50)
 
     def __str__(self):
         return str(self.filename)
+
+
+@python_2_unicode_compatible
+class aTimeLogger(models.Model):
+    ActivityType = models.CharField(max_length=50)
+    Duration = models.CharField(max_length=5)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    Comment = models.TextField()
+
+    def __str__(self):
+        return str(self.id)
+
 
 @python_2_unicode_compatible
 class SleepAs(models.Model):

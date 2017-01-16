@@ -7,7 +7,7 @@ from django.core.files.storage import default_storage
 
 
 class Command(BaseCommand):
-    help = 'Imports SleepAs data from a local SleepAs csv export'
+    help = 'Imports SleepAs data from the SleepAs csv file on Dropbox'
 
     def add_arguments(self, parser):
         parser.add_argument('csv_file', nargs='+', type=str)
@@ -90,7 +90,7 @@ class Command(BaseCommand):
         return times
 
     def read_csv(self, filename):
-        # TODO: make permanent (maybe a selector from Dropbox for the SleepAsConfig filename)
+        # TODO: make permanent (maybe a selector from Dropbox for the FileConfig file_type 'SleepAs')
 
         if default_storage.exists('/Apps/Sleep Cloud Backup/Sleep as Android Data'):
             with default_storage.open('/Apps/Sleep Cloud Backup/Sleep as Android Data', 'r') as csvfile:
