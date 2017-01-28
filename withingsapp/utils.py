@@ -4,7 +4,9 @@ from django.core.exceptions import ImproperlyConfigured
 from withings import WithingsApi, WithingsAuth, WithingsCredentials
 
 from . import defaults
-from .models import WithingsUser
+
+from withingsapp.models import *
+from django.contrib.auth.models import User
 
 
 def create_withings(consumer_key=None, consumer_secret=None, **kwargs):
@@ -38,6 +40,7 @@ def get_consumer_key_and_secret(consumer_key=None, consumer_secret=None):
             "explicitly specified or set in your Django settings")
 
     return (consumer_key, consumer_secret)
+
 
 def is_integrated(user):
     """Returns ``True`` if we have Oauth info for the user.
@@ -73,3 +76,19 @@ def get_setting(name, use_defaults=True):
             return getattr(defaults, name)
     msg = "{0} must be specified in your settings".format(name)
     raise ImproperlyConfigured(msg)
+
+
+def update_measurements():
+        # hard coded user_id (for the time being/individual use)
+        # TODO: loop through all users, that are previously authenticated with WiThings
+        user_id = 1
+        user = User.objects.get(id=user_id)
+
+        # get the withings user
+        withings_user = WithingsUser.objects.filter(user_id=user_id).first()
+        #withings_user = withings_user[0]
+
+        # call the withings API service
+        api = utils.create_withings(**withings_user.get_user_data())
+
+        MeasureGroup.create_from_measures(user, api.get_measures())

@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'withingsapp',
     'storages',
     'django_dropbox',
+    'django_q',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
