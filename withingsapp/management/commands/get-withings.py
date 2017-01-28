@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
         # hard coded user_id (for the time being/individual use)
         # TODO: loop through all users, that are previously authenticated with WiThings
-        user_id = options['user_id'][0]  # 1
+        user_id = 1
         user = User.objects.get(id=user_id)
 
         # get the withings user
