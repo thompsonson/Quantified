@@ -4,7 +4,9 @@ from django.core.exceptions import ImproperlyConfigured
 from withings import WithingsApi, WithingsAuth, WithingsCredentials
 
 from . import defaults
-from .models import WithingsUser
+
+from withingsapp.models import *
+from django.contrib.auth.models import User
 
 
 def create_withings(consumer_key=None, consumer_secret=None, **kwargs):
@@ -38,6 +40,7 @@ def get_consumer_key_and_secret(consumer_key=None, consumer_secret=None):
             "explicitly specified or set in your Django settings")
 
     return (consumer_key, consumer_secret)
+
 
 def is_integrated(user):
     """Returns ``True`` if we have Oauth info for the user.
