@@ -12,6 +12,9 @@ class FileConfig(models.Model):
     file_to_process = models.CharField(max_length=250)
     file_type = models.CharField(max_length=50)
 
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True) 
+
     def __str__(self):
         return str(self.filename)
 
@@ -23,6 +26,9 @@ class aTimeLogger(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     Comment = models.TextField()
+
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)    
 
     def __str__(self):
         return str(self.id)
@@ -42,6 +48,9 @@ class SleepAs(models.Model):
     Geo = models.TextField()
     awake_during_the_night = models.IntegerField()
     sleep_data = models.TextField()
+
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True) 
 
     def __str__(self):
         return str(self._id)
