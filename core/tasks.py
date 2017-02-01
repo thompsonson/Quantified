@@ -3,9 +3,7 @@ import logging
 
 logger = logging.getLogger('tasks')
 
-logger.info("loading modules")
-
-from django.core.models import aTimeLogger
+from .models import aTimeLogger
 from django.core.files.storage import default_storage
 from datetime import datetime
 import csv
@@ -26,7 +24,8 @@ def import_aTimeLogger_csv(filename='/Quantified/report.csv'):
                     break
                 if row[0] == "Activity type":
                     continue  # skip the header
-                logger.debug('row: "%s"' % row)
+                logger.info('row: "%s"' % row)
+#                aTimeLogger.new_activity(row)
                 aTL, created = aTimeLogger.objects.get_or_create(
                     ActivityType=row[0],
                     Duration=row[1],
@@ -34,7 +33,7 @@ def import_aTimeLogger_csv(filename='/Quantified/report.csv'):
                     end_time=datetime.strptime(row[3], '%Y-%m-%d %H:%M'),
                     Comment=row[4]
                 )
-                created = 0
+#                created = 0
                 if created:
                     activities_created = activities_created + 1
             logger.info('completed, %d activites created' % activities_created)
