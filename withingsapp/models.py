@@ -5,7 +5,9 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from math import pow
 from withings import WithingsCredentials, WithingsApi
+import logging
 
+logger = logging.getLogger(__name__)
 
 UserModel = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
@@ -86,20 +88,27 @@ class MeasureGroup(models.Model):
     # TODO: return a summary of what has been inserted (number, dates etc...)
     @classmethod
     def create_from_measures(cls, user, measures):
+        measure_groups_created = 0
+        measures_created = 0
         for withings_measure in measures:
             if MeasureGroup.objects.filter(grpid=withings_measure.grpid,
                                            user=user).exists():
                 continue
+            logger.info("Adding Measure Group: " + withings_measure.grpid)
             measure_grp = MeasureGroup.objects.create(
                 user=user, grpid=withings_measure.grpid,
                 attrib=withings_measure.attrib,
                 category=withings_measure.category,
                 date=withings_measure.date.datetime,
                 updatetime=measures.updatetime.datetime)
+            measure_groups_created = measure_groups_created + 1
             for measure in withings_measure.measures:
+                logger.info("Adding Measure: " + measure['type'])
                 Measure.objects.create(
                     group=measure_grp, value=measure['value'],
                     measure_type=measure['type'], unit=measure['unit'])
+                measures_created = measures_created + 1
+        return (measure_groups_created, measures_created)
 
 
 @python_2_unicode_compatible
