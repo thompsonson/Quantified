@@ -4,7 +4,7 @@ from withingsapp import utils
 from django.contrib.auth.models import User
 import logging
 
-logger = logging.getLogger('tasks'')
+logger = logging.getLogger('tasks')
 
 
 def update_measurements():

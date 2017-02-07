@@ -13,7 +13,7 @@ def import_aTimeLogger_csv(filename='/Quantified/report.csv'):
     # TODO: make permanent (maybe a selector from Dropbox for the FileConfig file_type 'SleepAs')
     activities_created = 0
     logger.info("check for report.csv from Dropbox folder: %s" % filename)
-    exit
+    # exit
 
     if default_storage.exists(filename):
         logger.info("reading report.csv from Dropbox folder")
@@ -25,7 +25,6 @@ def import_aTimeLogger_csv(filename='/Quantified/report.csv'):
                 if row[0] == "Activity type":
                     continue  # skip the header
                 logger.info('row: "%s"' % row)
-#                aTimeLogger.new_activity(row)
                 aTL, created = aTimeLogger.objects.get_or_create(
                     ActivityType=row[0],
                     Duration=row[1],
@@ -33,7 +32,6 @@ def import_aTimeLogger_csv(filename='/Quantified/report.csv'):
                     end_time=datetime.strptime(row[3], '%Y-%m-%d %H:%M'),
                     Comment=row[4]
                 )
-#                created = 0
                 if created:
                     activities_created = activities_created + 1
             logger.info('completed, %d activites created' % activities_created)
