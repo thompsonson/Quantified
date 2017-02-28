@@ -3,4 +3,6 @@ db.sqlite3
 Quantified/settings_secret.py
 Quantified.log
 Quantified.sublime*
+.DS_Store
+
 

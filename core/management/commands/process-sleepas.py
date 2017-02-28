@@ -17,7 +17,7 @@ class Command(BaseCommand):
         for csv_file in options['csv_file']:
             self.stdout.write(self.style.SUCCESS('Processing file: "%s"' % csv_file))
             data = self.read_csv(csv_file)
-            # self.stdout.write(self.style.SUCCESS('data : %s' % data))
+            self.stdout.write(self.style.SUCCESS('data (line 20): %s' % data))
             self.stdout.write(self.style.SUCCESS('converted file: "%s"' % csv_file))
             self.import_data(data)
             self.stdout.write(self.style.SUCCESS('imported file: "%s"' % csv_file))
@@ -112,15 +112,17 @@ class Command(BaseCommand):
                             data_sleep.append(row)
                 return data_sleep
         else:
-            self.style.FAILURE("file doesn't exist")
+            self.style.ERROR("file doesn't exist")
             exit
 
     def import_data(self, data):
         num_epochs = 5
 
+        self.stdout.write(self.style.SUCCESS('data: "%s"' % data))
+
         for row in data:
-            # self.stdout.write(self.style.SUCCESS('row: "%s"' % row))
-            # self.stdout.write(self.style.SUCCESS('row id: "%s"' % row['id']))
+            self.stdout.write(self.style.SUCCESS('row: "%s"' % row))
+            self.stdout.write(self.style.SUCCESS('row id: "%s"' % row['id']))
             sleep = SleepAs()
             sleep._id = int(row['id'])
             sleep.Tz = row['Tz']

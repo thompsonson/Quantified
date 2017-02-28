@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'core/', include('core.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^withings/', include('withingsapp.urls')),
+    url('^', include('django.contrib.auth.urls')),
 ]

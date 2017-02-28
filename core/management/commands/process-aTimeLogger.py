@@ -19,8 +19,8 @@ class Command(BaseCommand):
     def read_csv(self, filename):
         # TODO: make permanent (maybe a selector from Dropbox for the FileConfig file_type 'SleepAs')
 
-        if default_storage.exists('/QuantMe/report.csv'):
-            with default_storage.open('/QuantMe/report.csv', 'r') as csvfile:
+        if default_storage.exists('/Quantified/report.csv'):
+            with default_storage.open('/Quantified/report.csv', 'r') as csvfile:
                 source = csv.reader(csvfile)
                 for row in source:
                     if len(row) < 1:
@@ -40,3 +40,5 @@ class Command(BaseCommand):
         else:
             self.style.FAILURE("file doesn't exist")
             exit
+
+            

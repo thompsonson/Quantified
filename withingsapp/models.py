@@ -94,7 +94,7 @@ class MeasureGroup(models.Model):
             if MeasureGroup.objects.filter(grpid=withings_measure.grpid,
                                            user=user).exists():
                 continue
-            logger.info("Adding Measure Group: " + withings_measure.grpid)
+            logger.info("Adding Measure Group: " + str(withings_measure.grpid))
             measure_grp = MeasureGroup.objects.create(
                 user=user, grpid=withings_measure.grpid,
                 attrib=withings_measure.attrib,
@@ -103,7 +103,7 @@ class MeasureGroup(models.Model):
                 updatetime=measures.updatetime.datetime)
             measure_groups_created = measure_groups_created + 1
             for measure in withings_measure.measures:
-                logger.info("Adding Measure: " + measure['type'])
+                logger.info("Adding Measure: " + str(measure['type']))
                 Measure.objects.create(
                     group=measure_grp, value=measure['value'],
                     measure_type=measure['type'], unit=measure['unit'])
