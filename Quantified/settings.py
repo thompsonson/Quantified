@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'withingsapp',
+    'django_humanapi',
     'storages',
     'django_dropbox',
     'django.contrib.admin',
