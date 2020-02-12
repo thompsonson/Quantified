@@ -5,7 +5,7 @@ Babel==2.3.4
 blessed==1.14.1
 colorama==0.3.7
 coverage==3.7.1
-Django==1.10.5
+Django==1.11.28
 django-debug-toolbar==1.6
 django-dropbox==0.0.2
 django-picklefield==0.3.2
