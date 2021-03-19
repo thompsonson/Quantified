@@ -16,7 +16,7 @@ dropbox==7.1.1
 freezegun==0.2.8
 future==0.16.0
 imagesize==0.7.1
-Jinja2==2.9.1
+Jinja2==2.11.3
 MarkupSafe==0.23
 mock==1.0.1
 oauthlib==2.0.1
