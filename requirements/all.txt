@@ -6,7 +6,7 @@ blessed==1.14.1
 colorama==0.3.7
 coverage==3.7.1
 Django==1.10.5
-django-debug-toolbar==1.6
+django-debug-toolbar==1.11.1
 django-dropbox==0.0.2
 django-picklefield==0.3.2
 django-q==0.7.18
